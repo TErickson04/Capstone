@@ -216,11 +216,15 @@
 		global $ErrCount;
 		global $payError;
 		global $payValid;
+		global $newDate;
+		global $date;
 		if(!empty($data)){
-			$data = trim($data);
-			$data = stripslashes($data);
-			$date = date(Y-m-d);
-			if($date <= $data){
+			date_default_timezone_set('America/Chicago');
+			//$data = trim($data);
+			//$data = stripslashes($data);
+			$newDate = date($data);
+			$date = date('Y-m-d');
+			if($date >= $newDate){
 				return $data;
 				$payValid = 0;
 			}
@@ -354,11 +358,10 @@
 			  <label for="validationServer05">NRA Number</label>
 			  <input type="text" <?php echo ($nraValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_nra" placeholder="NRA #" value="<?php echo $nraNumber ?>" required>
 			  <?php echo $nraError ?>
-			</div>
+			</div>		
+		</div>
 		<button class='btn btn-link' type='submit' name='addbtn'>Add Member</button>
 		<button class='btn btn-link' align='center'><a href='adminhome.php?page=1'>View</a></button>
-	</div>
-		
 	</form>
 </div><?php;
 		

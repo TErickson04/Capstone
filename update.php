@@ -214,16 +214,19 @@ function validFirstName($data, $field){
 	}
 	
 	
-	
 	function validPayDate($data, $field){
 		global $ErrCount;
 		global $payError;
 		global $payValid;
+		global $newDate;
+		global $date;
 		if(!empty($data)){
-			$data = trim($data);
-			$data = stripslashes($data);
-			$date = date(Y-m-d);
-			if($date <= $data){
+			date_default_timezone_set('America/Chicago');
+			//$data = trim($data);
+			//$data = stripslashes($data);
+			$newDate = date($data);
+			$date = date('Y-m-d');
+			if($date >= $newDate){
 				return $data;
 				$payValid = 0;
 			}
@@ -287,9 +290,8 @@ if($ErrCount > 0){
 
 	?>
 	<div class="container" align="center">
-	<form method='post' action='update.php'>
-	
-		<h3>Edit Member</h3>
+	<h3>Edit Member</h3>
+	<form method='post' action='update.php'>		
 		<p class='text-danger'><?php echo $ErrCount ?> error(s), please go back and re-fill the form below.</p>
 			<input type='hidden' name='memids' value='<?php echo $id ?>' />
 			<div class="form-row">
