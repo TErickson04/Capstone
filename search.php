@@ -7,7 +7,7 @@ if(isset($_POST['search'])){
 <!doctype html>
 <html>
 <head>
-  <title>Virginia Rifle And Pistl Club</title>
+  <title>Virginia Rifle And Pistol Club</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -27,9 +27,9 @@ if(isset($_POST['search'])){
 <div align="center" class="container">
 	<!-- This form displays the search box with query in the search result page -->
 	<br/>
-	<form method="post" action="search.php" class="form-inline">
+	<form method="post" action="search.php" class="form-inline justify-content-center">
 		<input class="form-control mr-sm-2" type="text" name="srch_query" value="<?php echo $q ?>" required>
-		<input class="btn btn-primary" type="submit" name="search" value="Search">		
+		<input class="btn btn-outline-primary" type="submit" name="search" value="Search">		
 	</form> <!-- Form ends -->
 </div>
 
@@ -83,7 +83,8 @@ else{
 		</tbody>
 </table><br/>
 <div align="center">
-	<button class="btn btn-link"><a href="add.php">Add new Member</a></button><br/><button class="btn btn-link"><a href="adminhome.php?page=1">View Members</a></button>
+	<button class="btn btn-outline-primary" onclick="window.location.href='add.php'">Add Member</button>
+	<button class="btn btn-outline-primary" onclick="window.location.href='adminhome.php?page=1'">View Members</button>
 </div>
 
 
