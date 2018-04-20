@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-  <title>Virginia Rifle And Pistl Club</title>
+  <title>Virginia Rifle And Pistol Club</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -36,16 +36,20 @@
 	function validFirstName($data, $field){
 		global $ErrCount;
 		global $fnameError;
+	    global $fnameValid;
 		if(!empty($data)){
 			$data = trim($data);
 			$data = stripslashes($data);
 			$pattern = "/[a-zA-Z]{3,30}/";
 			if(preg_match($pattern, $data)){
 				return $data;
+				$fnameValid = 0;
 			}
 			else{
-				//echo "Enter a valid $field<br/>";
-				$fnameError = "Enter a valid $field<br/>";
+				$fnameError = "<div class='invalid-feedback'>
+								 Please enter a valid first name
+							   </div>";
+				$fnameValid = 1;
 				$ErrCount++;
 			}
 		}
@@ -54,16 +58,20 @@
 	function validLastName($data, $field){
 		global $ErrCount;
 		global $lnameError;
+		global $lnameValid;
 		if(!empty($data)){
 			$data = trim($data);
 			$data = stripslashes($data);
 			$pattern = "/^[a-zA-Z '.-]*$/";
 			if(preg_match($pattern, $data)){
 				return $data;
+				$lnameValid = 0;
 			}
 			else{
-				//echo "Enter a valid $field<br/>";
-				$lnameError = "Enter a valid $field<br/>";
+				$lnameError = "<div class='invalid-feedback'>
+								 Please enter a valid last name
+							   </div>";
+				$lnameValid = 1;
 				$ErrCount++;
 			}
 		}
@@ -72,16 +80,20 @@
 	function validAddress($data, $field){
 		global $ErrCount;
 		global $addressError;
+		global $addressValid;
 		if(!empty($data)){
 			$data = trim($data);
 			$data = stripslashes($data);
 			$pattern = "/[A-Za-z0-9'\.\-\s\,]/";
 			if(preg_match($pattern, $data)){
 				return $data;
+				$addressValid = 0;
 			}
 			else{
-				//echo "$field is not in the correct format<br/>";
-				$addressError = "$field is not in the correct format<br/>";
+				$addressError = "<div class='invalid-feedback'>
+									Please provide a valid address.
+								  </div>";
+				$addressValid = 1;
 				$ErrCount++;
 			}
 		}
@@ -90,16 +102,20 @@
 	function validCity($data, $field){
 		global $ErrCount;
 		global $cityError;
+		global $cityValid;
 		if(!empty($data)){
 			$data = trim($data);
 			$data = stripslashes($data);
 			$pattern = "/^[a-zA-Z '.-]*$/";
 			if(preg_match($pattern, $data)){
 				return $data;
+				$cityValid = 0;
 			}
 			else{
-				//echo "$field is not in the correct format<br/>";
-				$cityError = "$field is not in the correct format<br/>";
+				$cityError = "<div class='invalid-feedback'>
+								Please provide a valid city.
+							  </div>";
+				$cityValid = 1;
 				$ErrCount++;
 			}
 		}
@@ -108,16 +124,20 @@
 	function validState($data, $field){
 		global $ErrCount;
 		global $stateError;
+		global $stateValid;
 		if(!empty($data)){
 			$data = trim($data);
 			$data = stripslashes($data);
 			$pattern = "/^[A-Z]{2}$/";
 			if(preg_match($pattern, $data)){
 				return $data;
+				$stateValid = 0;
 			}
 			else{
-				//echo "$field is not in the correct format<br/>";
-				$stateError = "$field must use capital abbreviation<br/>";
+				$stateError = "<div class='invalid-feedback'>
+								Please provide a valid state.
+							  </div>";
+				$stateValid = 1;
 				$ErrCount++;
 			}
 		}
@@ -126,16 +146,20 @@
 	function validZip($data, $field){
 		global $ErrCount;
 		global $zipError;
+		global $zipValid;
 		if(!empty($data)){
 			$data = trim($data);
 			$data = stripslashes($data);
 			$pattern = "/[0-9]{5}/";
 			if(preg_match($pattern, $data)){
 				return $data;
+				$zipValid = 0;
 			}
 			else{
-				//echo "$field is not in the correct format<br/>";
-				$zipError = "$field is not in the correct format<br/>";
+				$zipError = "<div class='invalid-feedback'>
+								Please provide a valid zip.
+							  </div>";
+				$zipValid = 1;
 				$ErrCount++;
 			}
 		}
@@ -144,16 +168,21 @@
 	function validEmail($data, $field){
 		global $ErrCount;
 		global $emailError;
+		global $emailValid;
 		if(!empty($data)){
 			$data = trim($data);
 			$data = stripslashes($data);
+
 			$pattern = "/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[_a-z0-9-]+(\.[_a-z0-9-]+)*(\.[a-z]{2,3})$/i";
 			if(preg_match($pattern, $data)){
 				return $data;
+				$emailValid = 0;
 			}
 			else{
-				//echo "Enter the valid $field<br/>";
-				$emailError = "Enter the valid $field<br/>";
+				$emailError = "<div class='invalid-feedback'>
+								Please provide a valid email.
+							  </div>";
+				$emailValid = 1;
 				$ErrCount++;
 			}
 		}
@@ -162,36 +191,44 @@
 	function validPhone($data, $field){
 		global $ErrCount;
 		global $phoneError;
+		global $phoneValid;
 		if(!empty($data)){
 			$data = trim($data);
 			$data = stripslashes($data);
 			$pattern = "/\d{3}-\d{3}-\d{4}/";
 			if(preg_match($pattern, $data)){
 				return $data;
+				$phoneValid = 0;
 			}
 			else{
-				//echo "Enter the $field of format: ###-###-####<br/>";
-				$phoneError = "Enter the $field of format: ###-###-####<br/>";
+				$phoneError = "<div class='invalid-feedback'>
+								Please provide a valid phone.
+							  </div>";
+				$phoneValid = 1;
 				$ErrCount++;
 			}
 		}
 	}
 	
-
+	
 	
 	function validPayDate($data, $field){
 		global $ErrCount;
 		global $payError;
+		global $payValid;
 		if(!empty($data)){
 			$data = trim($data);
 			$data = stripslashes($data);
-			$pattern = "/([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/";
-			if(preg_match($pattern, $data)){
+			$date = date(Y-m-d);
+			if($date <= $data){
 				return $data;
+				$payValid = 0;
 			}
 			else{
-				//echo "Enter the $field of format: YYYY-MM-DD or YYYY/MM/DD<br/>";
-				$payError = "Enter the $field of format: YYYY-MM-DD or YYYY/MM/DD<br/>";
+				$payError = "<div class='invalid-feedback'>
+								Please provide a valid payment date.
+							  </div>";
+				$payValid = 1;
 				$ErrCount++;
 			}
 		}
@@ -200,16 +237,20 @@
 	function validNra($data, $field){
 		global $ErrCount;
 		global $nraError;
+		global $nraValid;
 		if(!empty($data)){
 			$data = trim($data);
 			$data = stripslashes($data);
 			$pattern = "/^[0-9]{9}$/";
 			if(preg_match($pattern, $data)){
 				return $data;
+				$nraValid = 0;
 			}
 			else{
-				//echo "Enter a 9-digit $field<br/>";
-				$nraError = "Enter a 9-digit $field<br/>";
+				$nraError = "<div class='invalid-feedback'>
+								Please provide a valid NRA Number.
+							  </div>";
+				$nraValid = 1;
 				$ErrCount++;
 			}
 		}
@@ -240,71 +281,84 @@
 		$status = $_POST['e_status'];
 		$payment = $_POST['e_payment'];
 		$nraNumber = $_POST['e_nra'];
-		echo "<div class='container' align='center' style='margin-top: 10px;'><h4 class='text-danger'>$ErrCount error(s), please go back and re-fill the form below.</h4><br/></div>";
+	
 		?>
-	<div class="container" align="center">
+<div class="container" align="center">
 	<form method="post" action="verify.php">	
 		<h3>Add a Member</h3>
-		<div class="form-group form-row">
-			<label class="col-md-2" for="fname">First Name:</label>
-			<input class="col-md-2" type='text' name='f_name' placeholder='First Name' required value='<?php echo $firstName ?>'>
-			<p class='form-control-static text-danger'>&nbsp;<?php echo $fnameError ?></p>				
-		</div>
-		<div class="form-group form-row">
-			<label class="col-md-2" for="lname">Last Name:</label>
-			<input class="col-md-2" type='text' name='l_name' placeholder='Last Name' required value='<?php echo $lastName ?>'>
-			<p class='form-control-static text-danger'>&nbsp;<?php echo $lnameError ?></p>
-		</div>
-		<div class="form-group form-row">
-			<label class="col-md-2" for="address">Address:</label>
-			<input class="col-md-2" type='text' name='e_address' placeholder='Address' required value='<?php echo $address ?>'>
-			<p class='form-control-static text-danger'>&nbsp;<?php echo $addressError ?></p>
-		</div>
-		<div class="form-group form-row">
-			<label class="col-md-2" for="city">City:</label>
-			<input class="col-md-2" type='text' name='e_city' placeholder='City' required value='<?php echo $city ?>'>
-			<p class='form-control-static text-danger'>&nbsp;<?php echo $cityError ?></p>
-		</div>
-		<div class="form-group form-row">
-			<label class="col-md-2" for="state">State:</label>
-			<input class="col-md-2" type='text' name='e_state' placeholder='State' required value='<?php echo $state ?>'>
-			<p class='form-control-static text-danger'>&nbsp;<?php echo $stateError ?></p>
-		</div>
-		<div class="form-group form-row">
-			<label class="col-md-2" for="zip">Zip Code:</label>
-			<input class="col-md-2" type='text' name='e_zip' placeholder='Zip Code' required value='<?php echo $zip ?>'>
-			<p class='form-control-static text-danger'>&nbsp;<?php echo $zipError ?></p>
-		</div>
-		<div class="form-group form-row">
-			<label class="col-md-2" for="email">Email:</label>
-			<input class="col-md-2" type='text' name='e_email' placeholder='Email' required value='<?php echo $email ?>' >
-			<p class='form-control-static text-danger'>&nbsp;<?php echo $emailError ?></p>
-		</div>
-		<div class="form-group form-row">
-			<label class="col-md-2" for="phone">Phone #:</label>
-			<input class="col-md-2" type='text' name='e_phone' placeholder='Phone #' required value='<?php echo $phone ?>'>
-			<p class='form-control-static text-danger'>&nbsp;<?php echo $phoneError ?></p>
-		</div>
-		<div class="form-group form-row">
-			<label class="col-md-2" for="status">Status:</label>
-			<select class="col-md-2" name='e_status' required>
-			  <option value=''>Select Status</option>
-			  <option <?php if ($status == 'Active') { ?>selected="true" <?php }; ?> value='Active'>Active</option>
-			  <option <?php if ($status == 'Inactive') { ?>selected="true" <?php }; ?> value='Inactive'>Inactive</option>
-			</select>
-		</div>
-		<div class="form-group form-row">
-			<label class="col-md-2" for="payment">Paymet Date:</label>
-			<input class="col-md-2" type='date' name='e_payment' required style='width: 180px;' value='<?php echo $payment ?>'>
-		</div>
-		<div class="form-group form-row">
-			<label class="col-md-2" for="nra">NRA #:</label>
-			<input class="col-md-2" type='text' name='e_nra' placeholder='NRA #' required value='<?php echo $nraNumber ?>'>
-			<p class='form-control-static text-danger'>&nbsp;<?php echo $nraError ?></p>
-		</div>
-		<button class='btn btn-link btn-light' type='submit' name='addbtn'>Add Member</button></td>
-		<button class='btn btn-link' align='center'><a href='adminhome.php?page=1'>View</a></button><br/>
-
+		<p class='text-danger'><?php echo $ErrCount ?> errors, please go back and re-fill the form below.</p>
+		<div class="form-row">
+			<div class="col-md-3 mb-3">
+			  <label for="validationServer01">First name</label>
+			  <input type="text" <?php echo ($fnameValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="f_name" placeholder="First name" value="<?php echo $firstName ?>" required>
+			  <?php echo $fnameError ?>
+			</div>
+			<div class="col-md-3 mb-3">
+			  <label for="validationServer02">Last name</label>
+			  <input type="text" <?php echo ($lnameValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="l_name" placeholder="Last name" value="<?php echo $lastName ?>" required>
+			  <?php echo $lnameError ?>
+			</div>
+		  </div>			
+		  <div class="form-row">
+			  <div class="col-md-3 mb-3">
+				  <label for="validationServer02">Address</label>
+				  <input type="text" <?php echo ($addressValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_address" placeholder="Address" value="<?php echo $address ?>" required>
+				  <?php echo $addressError ?>
+				</div>
+			<div class="col-md-2 mb-3">
+			  <label for="validationServer03">City</label>
+			  <input type="text" <?php echo ($cityValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_city" placeholder="City" value="<?php echo $city ?>" required>
+			  <?php echo $cityError ?>
+			</div>
+			<div class="col-md-1 mb-0">
+			  <label for="validationServer04">State</label>
+			  <input type="text" <?php echo ($stateValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_state" placeholder="State" value="<?php echo $state ?>" required>
+			  <?php echo $stateError ?>
+			</div>
+			<div class="col-md-1 mb-3">
+			  <label for="validationServer05">Zip</label>
+			  <input type="text" <?php echo ($zipValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_zip" placeholder="Zip" value="<?php echo $zip ?>" required>
+			  <?php echo $zipError ?>
+			</div>
+		  </div>
+		  <div class="form-row">
+			<div class="col-md-3 mb-3">
+			  <label for="validationServer04">Email</label>
+			  <input type="text" <?php echo ($emailValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_email" id="validationServer04" placeholder="Email" value="<?php echo $email ?>" required>
+			  <?php echo $emailError ?>
+			</div>
+			<div class="col-md-2 mb-3">
+			  <label for="validationServer05">Phone</label>
+			  <input type="text" <?php echo ($phoneValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_phone" placeholder="Phone" value="<?php echo $phone ?>" required>
+			  <?php echo $phoneError ?>
+			</div>
+		  </div>
+		  <div class="form-row">
+			<div class="col-md-2 mb-3">
+			  <label for="validationServer04">Status</label>
+			  <select class="custom-select custom-select-md mb-3 is-valid" name='e_status' required>
+				  <option value=''>Select Status</option>
+				  <option <?php if ($status == 'Active') { ?>selected="true" <?php }; ?> value='Active'>Active</option>
+				  <option <?php if ($status == 'Inactive') { ?>selected="true" <?php }; ?> value='Inactive'>Inactive</option>
+				</select>
+			</div>
+		  
+			<div class="col-md-2 mb-3">
+			  <label for="validationServer05">Payment Date</label>
+			  <input type="date" <?php echo ($payValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_payment" placeholder="Payment" value="<?php echo $payment ?>" required>
+			  <?php echo $payError ?>
+			</div>
+		  </div>
+			<div class="form-row">
+			<div class="col-md-3 mb-3">
+			  <label for="validationServer05">NRA Number</label>
+			  <input type="text" <?php echo ($nraValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_nra" placeholder="NRA #" value="<?php echo $nraNumber ?>" required>
+			  <?php echo $nraError ?>
+			</div>
+		<button class='btn btn-link' type='submit' name='addbtn'>Add Member</button>
+		<button class='btn btn-link' align='center'><a href='adminhome.php?page=1'>View</a></button>
+	</div>
+		
 	</form>
 </div><?php;
 		
