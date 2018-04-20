@@ -11,7 +11,7 @@ if(!isset($_SESSION['sess_username']) && $role!="admin"){
 <!doctype html>
 <html>
 <head>
-  <title>Virginia Rifle And Pistl Club</title>
+  <title>Virginia Rifle And Pistol Club</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -29,12 +29,12 @@ if(!isset($_SESSION['sess_username']) && $role!="admin"){
   </div>
 </div>
 <div class="container"><br>
-	<button class="btn btn-link"><a href="add.php">Add new Member</a></button>	
+	<button class="btn btn-outline-primary" onclick="window.location.href='add.php'">Add new Member</button>	
 	<form method="post" action="search.php" class="form-inline float-right">
-		<input class="form-control mr-sm-2" type="text" name="srch_query" placeholder="Search here..." required>
-		<input class="btn btn-primary" type="submit" name="search" value="Search">		
+		&nbsp;&nbsp;&nbsp;&nbsp;<input class="form-control mr-sm-2" type="text" name="srch_query" placeholder="Search here..." required>
+		<input class="btn btn-outline-primary" type="submit" name="search" value="Search">
 	</form>
-	<button class="btn btn-link float-right"><a href="logout.php">Logout</a></button>
+	<button class="btn btn-outline-primary float-right" onclick="window.location.href='logout.php'">Logout</button>
 </div>
 <div class="table-responsive" style="margin-top: 5px;">
 	<table class="table table-hover table-striped">
@@ -48,7 +48,7 @@ if(!isset($_SESSION['sess_username']) && $role!="admin"){
 				<th>State</th>
 				<th>Zip</th>
 				<th>Email</th>
-				<th>Phone</th>
+				<th>Phone #</th>
 				<th>Status</th>
 				<th>Payment Date</th>
 				<th>Action</th>
@@ -86,7 +86,7 @@ if(!isset($_SESSION['sess_username']) && $role!="admin"){
 						<td><?php echo $dispData['phone']; ?></td>
 						<td><?php echo $dispData['status']; ?></td>
 						<td><?php echo $dispData['payment']; ?></td>
-						<td><a class="btn btn-primary" href="editform.php?id=<?php echo $dispData['id']; ?>">Edit</a>&nbsp; | &nbsp;<a class="btn btn-danger" href="delete.php?id=<?php echo $dispData['id']; ?>" onclick="return confirm('Are you sure you want to delete this member?')">Delete</a></td>
+						<td><a class="btn btn-outline-primary" href="editform.php?id=<?php echo $dispData['id']; ?>">Edit</a>&nbsp; | &nbsp;<a class="btn btn-outline-danger" href="delete.php?id=<?php echo $dispData['id']; ?>" onclick="return confirm('Are you sure you want to delete this member?')">Delete</a></td>
 					</tr>
 			<?php	}
 				
@@ -111,14 +111,15 @@ if(!isset($_SESSION['sess_username']) && $role!="admin"){
 	if($current_page > 1)
 	{
 		?>
-		<button class="btn btn-link"><a href="?page=<?php echo ($current_page - 1); ?>" >Previous</a></button>
-	<?php }
+		<button class="btn btn-outline-primary" onclick="window.location.href='?page=<?php echo ($current_page - 1); ?>'">Previous</button>
+	<?php 
+	}
 	
 	
 	if($current_page < $num_of_pages)
 	{ ?>
 
-	<button class="btn btn-link"><a href="?page=<?php echo ($current_page + 1); ?>" >Next</a></button>
+	<button class="btn btn-outline-primary" onclick="window.location.href='?page=<?php echo ($current_page + 1); ?>'">Next</button>
 	<?php
 	}
 	
@@ -151,6 +152,7 @@ if(!isset($_SESSION['sess_username']) && $role!="admin"){
 {
 margin: 0;
 padding: 0;
+font-size: 20px;
 }
 .page li
 {

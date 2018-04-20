@@ -53,7 +53,7 @@ else{
 				<th>State</th>
 				<th>Zip</th>
 				<th>Email</th>
-				<th>Phone</th>
+				<th>Phone #</th>
 				<th>Status</th>
 				<th>Payment Date</th>
 				<th>Action</th>
@@ -75,7 +75,7 @@ else{
 						<td><?php echo $s['phone']; ?></td>
 						<td><?php echo $s['status']; ?></td>
 						<td><?php echo $s['payment']; ?></td>
-						<td><a class="btn btn-primary" href="editform.php?id=<?php echo $s['id']; ?>">Edit</a>&nbsp; | &nbsp;<a class="btn btn-danger" href="delete.php?id=<?php echo $s['id']; ?>" onclick="return confirm('Are you sure you want to delete this member?')">Delete</a></td>
+						<td><a class="btn btn-outline-primary" href="editform.php?id=<?php echo $s['id']; ?>">Edit</a>&nbsp; | &nbsp;<a class="btn btn-outline-danger" href="delete.php?id=<?php echo $s['id']; ?>" onclick="return confirm('Are you sure you want to delete this member?')">Delete</a></td>
 					</tr>
 	<?php } 
 }
