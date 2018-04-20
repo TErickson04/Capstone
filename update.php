@@ -94,7 +94,7 @@ function validFirstName($data, $field){
 			}
 			else{
 				$addressError = "<div class='invalid-feedback'>
-									Please provide a valid address.
+									Please provide a valid address
 								  </div>";
 				$addressValid = 1;
 				$ErrCount++;
@@ -116,7 +116,7 @@ function validFirstName($data, $field){
 			}
 			else{
 				$cityError = "<div class='invalid-feedback'>
-								Please provide a valid city.
+								Please provide a valid city
 							  </div>";
 				$cityValid = 1;
 				$ErrCount++;
@@ -138,7 +138,7 @@ function validFirstName($data, $field){
 			}
 			else{
 				$stateError = "<div class='invalid-feedback'>
-								Please provide a valid state.
+								Please provide a valid state
 							  </div>";
 				$stateValid = 1;
 				$ErrCount++;
@@ -160,7 +160,7 @@ function validFirstName($data, $field){
 			}
 			else{
 				$zipError = "<div class='invalid-feedback'>
-								Please provide a valid zip.
+								Zip code must be a 5-digit number
 							  </div>";
 				$zipValid = 1;
 				$ErrCount++;
@@ -183,7 +183,7 @@ function validFirstName($data, $field){
 			}
 			else{
 				$emailError = "<div class='invalid-feedback'>
-								Please provide a valid email.
+								Please provide a valid email
 							  </div>";
 				$emailValid = 1;
 				$ErrCount++;
@@ -205,7 +205,7 @@ function validFirstName($data, $field){
 			}
 			else{
 				$phoneError = "<div class='invalid-feedback'>
-								Please provide a valid phone.
+								Phone # must be in ###-###-#### format 
 							  </div>";
 				$phoneValid = 1;
 				$ErrCount++;
@@ -232,7 +232,7 @@ function validFirstName($data, $field){
 			}
 			else{
 				$payError = "<div class='invalid-feedback'>
-								Please provide a valid payment date.
+								Please provide a valid payment date
 							  </div>";
 				$payValid = 1;
 				$ErrCount++;
@@ -254,7 +254,7 @@ function validFirstName($data, $field){
 			}
 			else{
 				$nraError = "<div class='invalid-feedback'>
-								Please provide a valid NRA Number.
+								NRA # must be a 5-digit number
 							  </div>";
 				$nraValid = 1;
 				$ErrCount++;
@@ -294,7 +294,7 @@ if($ErrCount > 0){
 	<form method='post' action='update.php'>		
 		<p class='text-danger'><?php echo $ErrCount ?> error(s), please go back and re-fill the form below.</p>
 			<input type='hidden' name='memids' value='<?php echo $id ?>' />
-			<div class="form-row">
+			<div class="form-row justify-content-center">
 			<div class="col-md-3 mb-3">
 			  <label for="validationServer01">First name</label>
 			  <input type="text" <?php echo ($fnameValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="f_name" placeholder="First name" value="<?php echo $firstName ?>" required>
@@ -306,8 +306,8 @@ if($ErrCount > 0){
 			  <?php echo $lnameError ?>
 			</div>
 		  </div>			
-		  <div class="form-row">
-			  <div class="col-md-3 mb-3">
+		  <div class="form-row justify-content-center">
+			  <div class="col-md-2 mb-3">
 				  <label for="validationServer02">Address</label>
 				  <input type="text" <?php echo ($addressValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_address" placeholder="Address" value="<?php echo $address ?>" required>
 				  <?php echo $addressError ?>
@@ -328,19 +328,19 @@ if($ErrCount > 0){
 			  <?php echo $zipError ?>
 			</div>
 		  </div>
-		  <div class="form-row">
-			<div class="col-md-3 mb-3">
+		  <div class="form-row justify-content-center">
+			<div class="col-md-4 mb-3">
 			  <label for="validationServer04">Email</label>
 			  <input type="text" <?php echo ($emailValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_email" placeholder="Email" value="<?php echo $email ?>" required>
 			  <?php echo $emailError ?>
 			</div>
 			<div class="col-md-2 mb-3">
 			  <label for="validationServer05">Phone</label>
-			  <input type="text" <?php echo ($phoneValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_phone" placeholder="Phone" value="<?php echo $phone ?>" required>
+			  <input type="text" <?php echo ($phoneValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_phone" placeholder="###-###-####" value="<?php echo $phone ?>" required>
 			  <?php echo $phoneError ?>
 			</div>
 		  </div>
-		  <div class="form-row">
+		  <div class="form-row justify-content-center">
 			<div class="col-md-2 mb-3">
 			  <label for="validationServer04">Status</label>
 			  <select class="custom-select custom-select-md mb-3 is-valid" name='e_status' required>
@@ -355,9 +355,7 @@ if($ErrCount > 0){
 			  <input type="date" <?php echo ($payValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_payment" placeholder="Payment" value="<?php echo $payment ?>" required>
 			  <?php echo $payError ?>
 			</div>
-		  </div>
-			<div class="form-row">
-			<div class="col-md-3 mb-3">
+			<div class="col-md-2 mb-3">
 			  <label for="validationServer05">NRA Number</label>
 			  <input type="text" <?php echo ($nraValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_nra" placeholder="NRA #" value="<?php echo $nraNumber ?>" required>
 			  <?php echo $nraError ?>
