@@ -89,9 +89,8 @@
 			  <?php echo $nraError ?>
 			</div>
 		</div>
-		<button class='btn btn-link btn-light' type='submit' name='addbtn'>Add Member</button></td>
-		<button class='btn btn-link'><a href='adminhome.php?page=1'>View Members</a></button><br/>
-
+		<button class='btn btn-outline-primary' type='submit' name='addbtn'>Add Member</button>
+		<button class='btn btn-outline-primary' align='center' onclick="window.location.href='adminhome.php?page=1'">View Members</button>
 	</form>
 </div>
 </body>

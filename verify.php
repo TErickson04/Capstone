@@ -358,8 +358,8 @@
 			  <?php echo $nraError ?>
 			</div>
 		</div>			
-		<button class='btn btn-link' type='submit' name='addbtn'>Add Member</button>
-		<button class='btn btn-link' align='center'><a href='adminhome.php?page=1'>View</a></button>
+		<button class='btn btn-outline-primary' type='submit' name='addbtn'>Add Member</button>
+		<button class='btn btn-outline-primary' align='center' onclick="window.location.href='adminhome.php?page=1'">View Members</button>
 	</form>
 </div><?php;
 		

@@ -99,8 +99,8 @@ for($i = 0; $row = $result->fetch(); $i++){
 			</div>
 		  </div>
 			<?php }  ?>
-		<button class="btn btn-link" type="submit" name="editbtn" value="Save">Save</button>
-		<button class="btn btn-link"><a href="adminhome.php?page=1">View Members</a></button><br/>
+		<button class="btn btn-outline-primary" type="submit" name="editbtn" value="Save">Save</button>
+		<button class="btn btn-outline-primary" onclick="window.location.href='adminhome.php?page=1'">View Members</button>
 
 	</form>
 </div>

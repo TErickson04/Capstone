@@ -361,8 +361,8 @@ if($ErrCount > 0){
 			  <?php echo $nraError ?>
 			</div>
 		  </div>
-		<button class="btn btn-link btn-default" type="submit" name="editbtn" value="Save">Save</button>
-		<button class='btn btn-link' align='center'><a href='adminhome.php?page=1'>View Members</a></button><br/>
+		<button class="btn btn-outline-primary" type="submit" name="editbtn" value="Save">Save</button>
+		<button class="btn btn-outline-primary" onclick="window.location.href='adminhome.php?page=1'">View Members</button>
 
 	</form>
 	</div>

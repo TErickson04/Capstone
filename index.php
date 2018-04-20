@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-  <title>Virginia Rifle And Pistl Club</title>
+  <title>Virginia Rifle And Pistol Club</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
