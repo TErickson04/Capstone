@@ -8,19 +8,20 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <link rel="icon" type="image/png" href="images/logoblk.png" style="border-radius: 50%;">
+  <link rel="icon" type="image/png" href="images/logoblk.png">
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
 </head>
 
 <body>
-	<div class="container-fluid" style="background-color: #053582; height: 75px;">
-    <div align="center" style="width: 100%">
-	<img class="float-left" src="images/logoblk.png" width="60" height="60" style="border-radius: 50%; margin-top: 7px;"/>
-    <h1 style="color: white; padding-top: 10px;">Virginia Rifle and Pistol Club</h1>
-  </div>
-</div>
+	<div class="container-fluid" id="headerdiv">
+		<div align="center" id="logodiv">
+			<img id="icon" src="images/logoblk.png"/ alt="Logo">
+			<h1 id="header">Virginia Rifle and Pistol Club</h1>
+	    </div>
+	</div>
 
 <div class="container" align="center">
-	<form method="post" action="verify.php" style="text-decoration: none;">
+	<form method="post" action="verify.php"  id="addform">
 	
 		<h3 style='margin-top: 15px; margin-bottom: 15px;'>Add a Member</h3>
 		<div class="form-row justify-content-center">

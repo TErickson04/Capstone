@@ -2,7 +2,7 @@
 session_start();
 include('connect.php');
 if(isset($_POST['search'])){
-	$q = $_POST['srch_query']; //Search query of user saved to the variable 'q'
+	$q = htmlspecialchars($_POST['srch_query']); //Search query of user saved to the variable 'q'
 ?>
 <!doctype html>
 <html>
@@ -14,16 +14,17 @@ if(isset($_POST['search'])){
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <link rel="icon" type="image/png" href="images/logoblk.png" style="border-radius: 50%;">
+  <link rel="icon" type="image/png" href="images/logoblk.png">
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
 </head>
 
 <body>
-<div class="container-fluid" style="background-color: #053582; height: 75px;">
-  <div align="center" style="width: 100%">
-   <img class="float-left" src="images/logoblk.png" width="60" height="60" style="border-radius: 50%; margin-top: 7px;"/>
-    <h1 style="color: white; padding-top: 10px;">Virginia Rifle and Pistol Club</h1>
-  </div>
-</div>
+	<div class="container-fluid" id="headerdiv">
+		<div align="center" id="logodiv" style="">
+			<img id="icon" src="images/logoblk.png"/ alt="Logo">
+			<h1 id="header">Virginia Rifle and Pistol Club</h1>
+	    </div>
+	</div>
 <div align="center" class="container">
 	<!-- This form displays the search box with query in the search result page -->
 	<br/>
@@ -35,13 +36,13 @@ if(isset($_POST['search'])){
 
 
 <?php
-$search = $db->prepare("SELECT * FROM members WHERE fname LIKE '%$q%' OR lname LIKE '%$q%'");
+$search = $db->prepare("SELECT id, fname, lname, address, city, state, zip, email, phone, status, payment FROM members WHERE fname LIKE '%$q%' OR lname LIKE '%$q%'");
 $search->execute(); // Execute with wildcards
 
 if($search->rowcount()==0){echo "No match found!";}
 else{
 	echo "Search Result:<br/>";?>
-	<div class="table-responsive" style="margin-top: 5px;">
+	<div class="table-responsive" id="displaytable">
 	<table class="table table-hover table-striped">
 		<thead>
 			<tr>
@@ -75,7 +76,7 @@ else{
 						<td><?php echo $s['phone']; ?></td>
 						<td><?php echo $s['status']; ?></td>
 						<td><?php echo $s['payment']; ?></td>
-						<td><a class="btn btn-outline-primary" href="editform.php?id=<?php echo $s['id']; ?>">Edit</a>&nbsp; | &nbsp;<a class="btn btn-outline-danger" href="delete.php?id=<?php echo $s['id']; ?>" onclick="return confirm('Are you sure you want to delete this member?')">Delete</a></td>
+						<td><a class="btn btn-outline-primary btn-sm" href="editform.php?id=<?php echo $s['id']; ?>">Edit</a>&nbsp; | &nbsp;<a class="btn btn-outline-danger btn-sm" href="delete.php?id=<?php echo $s['id']; ?>" onclick="return confirm('Are you sure you want to delete this member?')">Delete</a></td>
 					</tr>
 	<?php } 
 }
@@ -83,7 +84,7 @@ else{
 		</tbody>
 </table><br/>
 <div align="center">
-	<button class="btn btn-outline-primary" onclick="window.location.href='add.php'">Add Member</button>
+	<button class="btn btn-outline-primary" onclick="window.location.href='add.php'">Add New Member</button>
 	<button class="btn btn-outline-primary" onclick="window.location.href='adminhome.php?page=1'">View Members</button>
 </div>
 

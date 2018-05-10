@@ -8,17 +8,18 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <link rel="icon" type="image/png" href="images/logoblk.png" style="border-radius: 50%;">
+  <link rel="icon" type="image/png" href="images/logoblk.png">
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
 </head>
 
 <body>
-	<div class="container-fluid" style="background-color: #053582; height: 75px;">
-  <div align="center" style="width: 100%">
-   <img class="float-left" src="images/logoblk.png" width="60" height="60" style="border-radius: 50%; margin-top: 7px;"/>
-    <h1 style="color: white; padding-top: 10px;">Virginia Rifle and Pistol Club</h1>
-  </div>
-</div>
-<?php 
+	<div class="container-fluid" id="headerdiv">
+		<div align="center" id="logodiv">
+			<img id="icon" src="images/logoblk.png"/ alt="Logo">
+			<h1 id="header">Virginia Rifle and Pistol Club</h1>
+	    </div>
+	</div>
+<?php
 	$firstName = $_POST['f_name'];
 	$lastName = $_POST['l_name'];
 	$address = $_POST['e_address'];
@@ -31,7 +32,7 @@
 	$payment = $_POST['e_payment'];
 	$nraNumber = $_POST['e_nra'];
 
-	
+
 
 	function validFirstName($data, $field){
 		global $ErrCount;
@@ -40,7 +41,7 @@
 		if(!empty($data)){
 			$data = trim($data);
 			$data = stripslashes($data);
-			$pattern = "/[a-zA-Z]{3,30}/";
+			$pattern = "/^[a-zA-Z '.-]*$/";
 			if(preg_match($pattern, $data)){
 				return $data;
 				$fnameValid = 0;
@@ -54,7 +55,7 @@
 			}
 		}
 	}
-	
+
 	function validLastName($data, $field){
 		global $ErrCount;
 		global $lnameError;
@@ -98,7 +99,7 @@
 			}
 		}
 	}
-	
+
 	function validCity($data, $field){
 		global $ErrCount;
 		global $cityError;
@@ -120,7 +121,7 @@
 			}
 		}
 	}
-	
+
 	function validState($data, $field){
 		global $ErrCount;
 		global $stateError;
@@ -142,7 +143,7 @@
 			}
 		}
 	}
-	
+
 	function validZip($data, $field){
 		global $ErrCount;
 		global $zipError;
@@ -150,7 +151,7 @@
 		if(!empty($data)){
 			$data = trim($data);
 			$data = stripslashes($data);
-			$pattern = "/[0-9]{5}/";
+			$pattern = "/^[0-9]{5}$/";
 			if(preg_match($pattern, $data)){
 				return $data;
 				$zipValid = 0;
@@ -195,23 +196,23 @@
 		if(!empty($data)){
 			$data = trim($data);
 			$data = stripslashes($data);
-			$pattern = "/\d{3}-\d{3}-\d{4}/";
+			$pattern = "/\d{3}-\d{3}-\d{4}$/";
 			if(preg_match($pattern, $data)){
 				return $data;
 				$phoneValid = 0;
 			}
 			else{
 				$phoneError = "<div class='invalid-feedback'>
-								Phone # must be in ###-###-#### format
+								###-###-#### format
 							  </div>";
 				$phoneValid = 1;
 				$ErrCount++;
 			}
 		}
 	}
-	
-	
-	
+
+
+
 	function validPayDate($data, $field){
 		global $ErrCount;
 		global $payError;
@@ -237,7 +238,7 @@
 			}
 		}
 	}
-	
+
 	function validNra($data, $field){
 		global $ErrCount;
 		global $nraError;
@@ -259,7 +260,7 @@
 			}
 		}
 	}
-	
+
 	$ErrCount = 0;
 	$firstName = validFirstName($_POST['f_name'], "First Name");
 	$lastName = validLastName($_POST['l_name'], "Last Name");
@@ -268,10 +269,10 @@
 	$state = validState($_POST['e_state'], "State");
 	$zip = validZip($_POST['e_zip'], "Zip");
 	$email = validEmail($_POST['e_email'], "Email ID");
-	$phone = validPhone($_POST['e_phone'], "Phone Number");	
+	$phone = validPhone($_POST['e_phone'], "Phone Number");
 	$payment = validPayDate($_POST['e_payment'], "Payment Date");
 	$nraNumber = validNra($_POST['e_nra'], "NRA Number");
-	
+
 
 	if ($ErrCount > 0){
 		$firstName = $_POST['f_name'];
@@ -285,55 +286,55 @@
 		$status = $_POST['e_status'];
 		$payment = $_POST['e_payment'];
 		$nraNumber = $_POST['e_nra'];
-	
+
 		?>
 <div class="container" align="center">
-	<form method="post" action="verify.php">	
+	<form method="post" action="verify.php">
 		<h3>Add a Member</h3>
 		<p class='text-danger'><?php echo $ErrCount ?> errors, please go back and re-fill the form below.</p>
 		<div class="form-row justify-content-center">
 			<div class="col-md-3 mb-3">
 			  <label for="validationServer01">First name</label>
-			  <input type="text" <?php echo ($fnameValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="f_name" placeholder="First name" value="<?php echo $firstName ?>" required>
+			  <input type="text" <?php echo ($fnameValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="f_name" placeholder="First name" value="<?php echo $_POST['f_name'] ?>" required>
 			  <?php echo $fnameError ?>
 			</div>
 			<div class="col-md-3 mb-3">
 			  <label for="validationServer02">Last name</label>
-			  <input type="text" <?php echo ($lnameValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="l_name" placeholder="Last name" value="<?php echo $lastName ?>" required>
+			  <input type="text" <?php echo ($lnameValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="l_name" placeholder="Last name" value="<?php echo $_POST['l_name'] ?>" required>
 			  <?php echo $lnameError ?>
 			</div>
-		  </div>			
+		  </div>
 		  <div class="form-row justify-content-center">
 			  <div class="col-md-2 mb-3">
 				  <label for="validationServer02">Address</label>
-				  <input type="text" <?php echo ($addressValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_address" placeholder="Address" value="<?php echo $address ?>" required>
+				  <input type="text" <?php echo ($addressValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_address" placeholder="Address" value="<?php echo $_POST['e_address'] ?>" required>
 				  <?php echo $addressError ?>
 				</div>
 			<div class="col-md-2 mb-3">
 			  <label for="validationServer03">City</label>
-			  <input type="text" <?php echo ($cityValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_city" placeholder="City" value="<?php echo $city ?>" required>
+			  <input type="text" <?php echo ($cityValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_city" placeholder="City" value="<?php echo $_POST['e_city'] ?>" required>
 			  <?php echo $cityError ?>
 			</div>
 			<div class="col-md-1 mb-0">
 			  <label for="validationServer04">State</label>
-			  <input type="text" <?php echo ($stateValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_state" placeholder="State" value="<?php echo $state ?>" required>
+			  <input type="text" <?php echo ($stateValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_state" placeholder="State" value="<?php echo $_POST['e_state'] ?>" required>
 			  <?php echo $stateError ?>
 			</div>
 			<div class="col-md-1 mb-3">
 			  <label for="validationServer05">Zip</label>
-			  <input type="text" <?php echo ($zipValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_zip" placeholder="Zip" value="<?php echo $zip ?>" required>
+			  <input type="text" <?php echo ($zipValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_zip" placeholder="Zip" value="<?php echo $_POST['e_zip'] ?>" required>
 			  <?php echo $zipError ?>
 			</div>
 		  </div>
-		  <div class="form-row">
+		  <div class="form-row justify-content-center">
 			<div class="col-md-4 mb-3">
 			  <label for="validationServer04">Email</label>
-			  <input type="text" <?php echo ($emailValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_email" id="validationServer04" placeholder="Email" value="<?php echo $email ?>" required>
+			  <input type="text" <?php echo ($emailValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_email" id="validationServer04" placeholder="Email" value="<?php echo $_POST['e_email'] ?>" required>
 			  <?php echo $emailError ?>
 			</div>
 			<div class="col-md-2 mb-3">
 			  <label for="validationServer05">Phone</label>
-			  <input type="text" <?php echo ($phoneValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_phone" placeholder="###-###-####" value="<?php echo $phone ?>" required>
+			  <input type="text" <?php echo ($phoneValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_phone" placeholder="###-###-####" value="<?php echo $_POST['e_phone'] ?>" required>
 			  <?php echo $phoneError ?>
 			</div>
 		  </div>
@@ -346,36 +347,47 @@
 				  <option <?php if ($status == 'Inactive') { ?>selected="true" <?php }; ?> value='Inactive'>Inactive</option>
 				</select>
 			</div>
-		  
+
 			<div class="col-md-2 mb-3">
 			  <label for="validationServer05">Payment Date</label>
-			  <input type="date" <?php echo ($payValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_payment" placeholder="Payment" value="<?php echo $payment ?>" required>
+			  <input type="date" <?php echo ($payValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_payment" placeholder="Payment" value="<?php echo $_POST['e_payment'] ?>" required>
 			  <?php echo $payError ?>
 			</div>
 			<div class="col-md-2 mb-3">
 			  <label for="validationServer05">NRA Number</label>
-			  <input type="text" <?php echo ($nraValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_nra" placeholder="NRA #" value="<?php echo $nraNumber ?>" required>
+			  <input type="text" <?php echo ($nraValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="e_nra" placeholder="NRA #" value="<?php echo $_POST['e_nra'] ?>" required>
 			  <?php echo $nraError ?>
 			</div>
-		</div>			
+		</div>
 		<button class='btn btn-outline-primary' type='submit' name='addbtn'>Add Member</button>
 		<button class='btn btn-outline-primary' align='center' onclick="window.location.href='adminhome.php?page=1'">View Members</button>
 	</form>
 </div><?php;
-		
+		$alert = false;
 	}
 	else{
 		if(isset($_POST['addbtn'])){
 			try{
-				include('connect.php');
+				include('connect.php'); 
 				$stmt = $db->prepare("INSERT INTO members(fName,lName,address,city,state,zip,email,phone,status,payment,nra)VALUES(:Fname,:Lname,:Address,:City,:State,:Zip,:Email,:Phone,:Status,:Payment,:Nra)");
-				$stmt->execute(array("Fname" => $_POST['f_name'], "Lname" => $_POST['l_name'], "Address" => $_POST['e_address'], "City" => $_POST['e_city'], "State" => $_POST['e_state'], "Zip" => $_POST['e_zip'], "Email" => $_POST['e_email'], "Phone" => $_POST['e_phone'], "Status" => $_POST['e_status'],"Payment" => $_POST['e_payment'],"Nra" => $_POST['e_nra'],));
-				header('Location: adminhome.php?page=1');
-				
+				$stmt->execute(array("Fname" => $firstName, "Lname" => $lastName, "Address" => $address, "City" => $city, "State" => $state, "Zip" => $zip, "Email" => $email, "Phone" => $phone, "Status" => $status,"Payment" => $payment,"Nra" => $nraNumber));
+				$alert = true;
+				if($alert){
+						echo "<script type='text/javascript'>window.alert('Member Successfully Added');window.location.href='adminhome.php?page=1';</script>";
+
+				}
+
+				$this->connection->close();
+
+
+				//header('Location: adminhome.php?page=1');
+
 			}
 			catch(PDOException $e){
 				echo 'ERROR: ' . $e->getMessage();
 			}
+
+
 		}
 	}
 
@@ -383,4 +395,3 @@
 
 </body>
 </html>
-

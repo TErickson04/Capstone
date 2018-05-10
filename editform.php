@@ -8,28 +8,36 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <link rel="icon" type="image/png" href="images/logoblk.png" style="border-radius: 50%;">
+  <link rel="icon" type="image/png" href="images/logoblk.png">
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
 </head>
 
 <body>
-	<div class="container-fluid" style="background-color: #053582; height: 75px;">
-    <div align="center" style="width: 100%">
-    <img class="float-left" src="images/logoblk.png" width="60" height="60" style="border-radius: 50%; margin-top: 7px;"/>
-    <h1 style="color: white; padding-top: 10px;">Virginia Rifle and Pistol Club</h1>
-  </div>
-</div>
+	<div class="container-fluid" id="headerdiv">
+		<div align="center" id="logodiv">
+			<img id="icon" src="images/logoblk.png"/ alt="Logo">
+			<h1 id="header">Virginia Rifle and Pistol Club</h1>
+	    </div>
+	</div>
 
-<?php 
+<?php
 include('connect.php');
 $id = $_GET['id'];
 $result = $db->prepare("SELECT * FROM members WHERE id= :userid");
 $result->bindParam(':userid', $id);
 $result->execute();
 for($i = 0; $row = $result->fetch(); $i++){
+  $password = '3sc3RLrpd17';
+  $method = 'aes-256-cbc';
+  $key = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
+  $iv = chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0) . chr(0x0);
+  //$encrypted = base64_encode(openssl_encrypt($row['nra'], $method, $key, OPENSSL_RAW_DATA, $iv));
+  $encryptedNra = $row['nra'];
+  $nraDecrypt = openssl_decrypt(base64_decode($encryptedNra), $method, $key, OPENSSL_RAW_DATA, $iv);
 
 ?>
 <div class="container" align="center">
-	<form method="post" action="update.php">	
+	<form method="post" action="update.php">
 		<h3 style="margin-top: 15px; margin-bottom: 15px;">Edit Member Information</h3>
 			<input type='hidden' name='memids' value='<?php echo $row['id'] ?>' />
 			<div class="form-row justify-content-center">
@@ -43,7 +51,7 @@ for($i = 0; $row = $result->fetch(); $i++){
 				  <input type="text" <?php echo ($lnameValid == 0) ? "class='form-control is-valid'" : "class='form-control is-invalid'"; ?> name="l_name" placeholder="Last name" value="<?php echo $row['lname'] ?>" required>
 				  <?php echo $lnameError ?>
 				</div>
-		  </div>			
+		  </div>
 		  <div class="form-row justify-content-center">
 			  <div class="col-md-2 mb-3">
 				  <label for="validationServer02">Address</label>
@@ -100,8 +108,7 @@ for($i = 0; $row = $result->fetch(); $i++){
 		  </div>
 			<?php }  ?>
 		<button class="btn btn-outline-primary" type="submit" name="editbtn" value="Save">Save</button>
-		<button class="btn btn-outline-primary" onclick="window.location.href='adminhome.php?page=1'">View Members</button>
-
 	</form>
+  <button id="viewbutton" class="btn btn-outline-primary" onclick="window.location.href='adminhome.php?page=1'">View Members</button>
 </div>
 </body>
