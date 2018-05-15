@@ -13,12 +13,10 @@
 </head>
 
 <body>
-	
+
 <?php
 	include ('header.php');
-	include ('addform.php');
+	include ('editform.php');
 ?>
 
 </body>
-</html>
-

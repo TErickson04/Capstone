@@ -18,14 +18,14 @@ $query->execute();
 $row = $query->fetch(PDO::FETCH_ASSOC);
 
 if($query->rowCount() == 0){
-		header('Location: index.php?login=error');
+		header('Location: index.php?err=1');
 		exit();	
 }else{
 	
 	$hashedPwdCheck = password_verify($password, $row['password']);
-	echo $hashedPwdCheck;
+	//echo $hashedPwdCheck;
 	if($hashedPwdCheck == 0){
-		header('Location: index.php?login=error');
+		header('Location: index.php?err=1');
 		exit();
 	}elseif($hashedPwdCheck == 1){
 		$_SESSION['sess_user_id'] = $row['id'];

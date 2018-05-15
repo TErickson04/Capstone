@@ -36,7 +36,7 @@ if(!isset($_SESSION['sess_username']) && $role!="admin"){
 </div>
 <div class="container" id="topbuttondiv">
 	<button class="btn btn-outline-primary btn-sm" onclick="window.location.href='add.php'">Add New Member</button>
-	<button class="btn btn-outline-primary btn-sm" onclick="window.location.href='viewall.php'">View All Members</button>	
+	<button class="btn btn-outline-primary btn-sm" onclick="window.location.href='adminhome.php?page=1'">Back</button>	
 	<button class="btn btn-outline-primary btn-sm float-right" onclick="window.location.href='logout.php'">Logout</button>
 </div>
 
@@ -61,22 +61,15 @@ if(!isset($_SESSION['sess_username']) && $role!="admin"){
 		<tbody>
 			<?php  
 				
-				$start = 0;
-				$limit = 10;
+				
 
-				if(isset($_GET['page']))
-				{
-					$current_page = $_GET['page'];
-					$start = ($current_page-1) *$limit;
-				}
-
-				$getData = $db->prepare('SELECT id, fname, lname, address, city, state, zip, email, phone, status, payment FROM members LIMIT :start, :limit');
-				$getData->bindParam(':start', $start, PDO::PARAM_INT);
-				$getData->bindParam(':limit', $limit, PDO::PARAM_INT);
-				$getData->execute();
-				//$result = $db->prepare("SELECT * FROM members ORDER BY id ASC");
-				//$result->execute();
-				while($dispData = $getData->fetch(PDO::FETCH_ASSOC)){
+				//$getData = $db->prepare('SELECT id, fname, lname, address, city, state, zip, email, phone, status, payment FROM members LIMIT :start, :limit');
+				//$getData->bindParam(':start', $start, PDO::PARAM_INT);
+				//$getData->bindParam(':limit', $limit, PDO::PARAM_INT);
+				//$getData->execute();
+				$result = $db->prepare("SELECT * FROM members ORDER BY id ASC");
+				$result->execute();
+				while($dispData = $result->fetch(PDO::FETCH_ASSOC)){
 					?>
 					<tr class="record">
 						<td align="center"><?php echo $dispData['id']; ?></td>
@@ -90,10 +83,12 @@ if(!isset($_SESSION['sess_username']) && $role!="admin"){
 						<td><?php echo $dispData['phone']; ?></td>
 						<td><?php echo $dispData['status']; ?></td>
 						<td><?php echo $dispData['payment'];?></td>
-						<td><a class="btn btn-outline-primary btn-sm" href="edit.php?id=<?php echo $dispData['id']; ?>">Edit</a>&nbsp; | &nbsp;<a class="btn btn-outline-danger btn-sm" href="delete.php?id=<?php echo $dispData['id']; ?>" onclick="return confirm('Are you sure you want to delete <?php echo $dispData['fname'] . " " . $dispData['lname']; ?> ?');">Delete</a></td>
+						<td><a class="btn btn-outline-primary btn-sm" href="edit.php?id=<?php echo $dispData['id']; ?>">Edit</a>&nbsp; | &nbsp;<a class="btn btn-outline-danger btn-sm" href="delete.php?id=<?php echo $dispData['id']; ?>" onclick="">Delete</a></td>
 					</tr>
 			<?php	}
-				
+				function delete(){
+					echo '<script> $("#myModal1").modal("show");</script>';
+				}
 
 			?>
 		</tbody>
@@ -101,52 +96,11 @@ if(!isset($_SESSION['sess_username']) && $role!="admin"){
 	</table>
 	<script type="text/javascript" src="jquery.min.js"></script> 
 
-	
+	<script type="text/javascript"> 
+	function doSomething() { 
+		$.get("deleteconfirm.php"); 
+		return false; 
+	} 
+	</script>
 
 </div>
-<div align="center">
-	
-
-	<?php
-	
-	$data=$db->prepare('SELECT * FROM members');
-	$data->execute();
-	$totalRecd = $data->rowCount();
-	$num_of_pages = ceil($totalRecd/$limit);
-	
-	
-	if($current_page > 1)
-	{
-		?>
-		<button class="btn btn-outline-primary btn-sm" onclick="window.location.href='?page=<?php echo ($current_page - 1); ?>'">Previous</button>
-	<?php 
-	}
-	
-	
-	if($current_page < $num_of_pages)
-	{ ?>
-
-	<button class="btn btn-outline-primary btn-sm" onclick="window.location.href='?page=<?php echo ($current_page + 1); ?>'">Next</button>
-	<?php
-	}
-	
-	echo "<ul class='page'>";
-	for($i=1; $i <= $num_of_pages; $i++)
-	{
-		if($i ==$current_page)
-		{
-			echo "<li class='current'>" .$i."</li>";
-		}
-		else
-		{
-			echo "<li><a href='?page=".$i."'>".$i."</a></li>";
-		}
-	}
-	echo "</ul>";
-	
-	?>
-</div>
-	
-</body>
-</html>
-

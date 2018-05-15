@@ -24,7 +24,7 @@
 	<h2 id="logintext">Administrator Login</h2>
 	<?php
 //Associative array to display 2 types of error message.
-	$errors = array(1=>"Invalid username or password, Try again",
+	$errors = array(1=>"Invalid username or password. Please try again.",
 				    2=>"Please login to access this area");
 //Get the error_id from URL
 	$error_id = $_GET['err'];
@@ -38,7 +38,7 @@
 ?>
 	<form action="authentication.php" method="post" role="form" class="form-signin">
 		<label class="col-form-label" for="username" style="font-size: 24px;">Username</label><input type="text" class="form-control col-md-4" id="username" name="username" placeholder="Username" required autofocus/>
-		<label class="col-form-label" for="password" style="font-size: 24px;">Password</label><input type="password" class="form-control col-md-4" id="password" name="password" placeholder="Password" required/>
+		<label class="col-form-label" for="password" style="font-size: 24px;">Password</label><input type="password" class="form-control col-md-4" id="password" name="password" placeholder="Password" required />
 		<button class="btn btn-lg btn-block" type="submit" style="color: white; background-color: #053582; width: 300px; margin-top: 15px; border: 2px; border-color: black;" name="submit">Sign in</button>
 	</form>
 </div>
